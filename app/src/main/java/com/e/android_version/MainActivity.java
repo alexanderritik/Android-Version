@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextView login;
-
+    TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
         login=findViewById(R.id.tvLogin);
+        logout=findViewById(R.id.tvLogout);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,6 +37,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mAuth.getCurrentUser()!=null)
+                {
+                    mAuth.signOut();
+                }else {
+                    Toast.makeText(MainActivity.this,"you haven't logged in",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
 
     }
